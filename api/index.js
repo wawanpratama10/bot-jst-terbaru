@@ -16,17 +16,16 @@ bot.onText(/\/start/, (msg) => {
     bot.sendMessage(
         msg.chat.id,
         `hello ${msg.chat.first_name}, welcome...\n
-        click  /predict to know about x1 x2 and x3`
+        Selamat datang di bot UAS islahuddin
+        click /predict`
     );   
 });
 
-
-
-state = 0;
+state = 0
 bot.onText(/\/predict/, (msg) => { 
     bot.sendMessage(
         msg.chat.id,
-        `input nilai x1|x2|x3 example 6|5|4`
+        `input nilai x1|x2|x3 contohnya 9|6|3`
     );   
     state = 1;
 });
@@ -34,9 +33,8 @@ bot.onText(/\/predict/, (msg) => {
 bot.on('message', (msg) => {
     if(state == 1){
         s = msg.text.split("|");
-        x1 = s[0]
-        x2 = s[1]
-        x3 = s[2]
+        x1 = s [0]
+        y1 = s [1]
         model.predict(
             [
                 parseFloat(s[0]), // string to float
@@ -46,23 +44,23 @@ bot.on('message', (msg) => {
         ).then((jres)=>{
             bot.sendMessage(
                 msg.chat.id,
-                `nilai x1 yang diprediksi adalah ${jres[0]} `
-            );   
+                `nilai y1 yang diprediksi adalah ${jres [0]} `
+                
+            ); 
             bot.sendMessage(
                 msg.chat.id,
-                `nilai x2 yang diprediksi adalah ${jres[1]} `
-            );   
-            bot.sendMessage(
+                `nilai y2 yang diprediksi adalah ${jres [1]} `
+            );
+            
+             bot.sendMessage(
                 msg.chat.id,
-                `nilai x3 yang diprediksi adalah ${jres[2]} `
-         );   
-})
+                `nilai y3 yang diprediksi adalah ${jres [2]} `
+            );
+        })
     }else{
         state = 0
     }
 })
-
-
 // routers
 r.get('/prediction/:x1/:x2/:x3', function(req, res, next) {    
     model.predict(
