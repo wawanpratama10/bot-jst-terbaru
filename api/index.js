@@ -16,7 +16,6 @@ bot.onText(/\/start/, (msg) => {
     bot.sendMessage(
         msg.chat.id,
         `hello ${msg.chat.first_name}, welcome...\n
-        Selamat datang di bot UAS islahuddin
         click /predict`
     );   
 });
